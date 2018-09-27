@@ -1,1 +1,0 @@
-import '../../../components/pages/home/home.css';
