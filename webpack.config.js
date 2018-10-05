@@ -1,66 +1,48 @@
 const webpack = require('webpack');
 const path = require('path');
+const object = require('lodash/fp/object');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+let IS_DEV = /webpack-dev-server/.test(process.argv[1]);
+IS_DEV = true;
 
 
-module.exports={
-    entry:{
+const config = require( IS_DEV ? './config/dev.config.js' : './config/pro.config.js');
+
+module.exports = object.assignIn({
+    entry: {
         home: './src/views/home/home.js',
         blog: './src/views/blog/blog.js'
+        ,about: './src/views/about/about.js'
     },
-
     output: {
-        filename: '[name]_[hash:8].js',
-        path: __dirname + '/dist'
+        path: __dirname + './dist'
     },
-
     module: {
         rules: [
             {
                 test: /\.scss$/,
-                use: ['style-loader', 'css-loader', 'sass-loader']
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    //resolve-url-loader may be chained before sass-loader if necessary
+                    use: ['css-loader', 'sass-loader']
+                })
             }
-            ,{
+            , {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
                 loader: 'url-loader',
                 options: {
                     limit: 10000,
                     name: path.posix.join('static', 'img/[name].[hash:7].[ext]')
-                 }
-           }
-            ,{
+                }
+            }
+            , {
                 test: /\.hbs$/,
                 use: ['handlebars-loader']
             }
         ]
-    }, 
+    }
 
-    plugins: [
-        new HtmlWebpackPlugin({
-            filename: 'home.html',
-            chunks:['home'],
-            template: 'html-withimg-loader!'+path.resolve(__dirname , './src/views/home/home.html')
-        }),
-        new HtmlWebpackPlugin({
-            filename: 'blog.html',
-            chunks:['blog'],
-            template: 'html-withimg-loader!'+path.resolve(__dirname , './src/views/blog/blog.html')
-        }),
-        new HtmlWebpackPlugin({
-            filename: 'about.html',
-            chunks:['about'],
-            template: 'html-withimg-loader!'+path.resolve(__dirname , './src/views/about/about.html')
-        })
-    ],
-
-    devServer:{
-        contentBase: './dist'
-        ,port: 8080
-    },
-    devtool: 'source-map'
-}
-
-function deepCopy(){
-    
-}
+}, config);

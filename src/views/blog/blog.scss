@@ -1,3 +1,22 @@
+@import '../../components/common/common.scss';
+
 .blog{
-    color: green;
+    width: 1000px;
+    margin:auto;
+
+    a{
+        color: gray;
+    }
+}
+
+nav{
+    height: 49px;
+    border-bottom: 1px solid #dedede;
+    line-height: 49px;
+}
+
+.blog-list{
+    ul{
+        list-style: none;
+    }
 }
