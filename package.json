@@ -6,6 +6,7 @@
     "scripts": {
         "prebuild": "rm -rf dist",
         "build": "webpack --progress --colors --hot",
+        "postbuild": "cp -rf dist/views/* ../web-server/views/ && cp -r ./dist/*  ../web-server/public/ && rm -rf ../web-server/public/views",
         "start:dev": "webpack-dev-server --mode development",
         "test": "echo \"Error: no test specified\" && exit 1"
     },

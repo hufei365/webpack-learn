@@ -12,13 +12,12 @@ const VIEWS_BASE  = path.resolve(__dirname, '.././src/views/');
 
 module.exports = {
     output: {
-        path: path.resolve(__dirname, '../web-server'),
-        filename: 'public/javascript/[name]_[hash:8].js',
+        filename: 'javascript/[name]_[hash:8].js',
         publicPath: 'http://127.0.0.1:3000/'
     },
     plugins: [
 
-        new ExtractTextPlugin('public/css/[name].css'),
+        new ExtractTextPlugin('css/[name]_[hash:8].css'),
 
         new HtmlWebpackPlugin({
             title: 'Home',
