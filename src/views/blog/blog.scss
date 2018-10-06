@@ -1,4 +1,6 @@
 @import '../../components/common/common.scss';
+@import '../../components/common/markdown.css';
+@import '../../components/common/code-github-style.css';
 
 .blog{
     width: 1000px;
@@ -18,5 +20,9 @@ nav{
 .blog-list{
     ul{
         list-style: none;
+    }
+
+    li a{
+        width: 100%;
     }
 }

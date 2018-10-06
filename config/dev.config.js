@@ -30,6 +30,12 @@ module.exports = {
             template: 'html-withimg-loader!' + VIEWS_BASE + '/blog/blog.html'
         }),
         new HtmlWebpackPlugin({
+            title: 'BlogDetail',
+            filename: 'views/blog-detail.html',
+            chunks: ['blog'],
+            template: 'html-withimg-loader!' + VIEWS_BASE + '/blog/blog-detail.html'
+        }),
+        new HtmlWebpackPlugin({
             title: 'About me',
             filename: 'about.html',
             chunks: ['about'],

@@ -12,12 +12,13 @@ const VIEWS_BASE  = path.resolve(__dirname, '.././src/views/');
 
 module.exports = {
     output: {
-        filename: 'static/javascript/[name]_[hash:8].js',
+        path: path.resolve(__dirname, '../web-server'),
+        filename: 'public/javascript/[name]_[hash:8].js',
         publicPath: 'http://127.0.0.1:3000/'
     },
     plugins: [
 
-        new ExtractTextPlugin('static/css/[name].css'),
+        new ExtractTextPlugin('public/css/[name].css'),
 
         new HtmlWebpackPlugin({
             title: 'Home',
@@ -30,6 +31,12 @@ module.exports = {
             filename: 'views/blog.html',
             chunks: ['blog'],
             template: 'html-withimg-loader!' + VIEWS_BASE + '/blog/blog.html'
+        }),
+        new HtmlWebpackPlugin({
+            title: 'BlogDetail',
+            filename: 'views/blog-detail.html',
+            chunks: ['blog'],
+            template: 'html-withimg-loader!' + VIEWS_BASE + '/blog/blog-detail.html'
         }),
         new HtmlWebpackPlugin({
             title: 'About me',

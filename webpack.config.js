@@ -6,10 +6,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 let IS_DEV = /webpack-dev-server/.test(process.argv[1]);
-IS_DEV = true;
+// IS_DEV = true;
 
 
 const config = require( IS_DEV ? './config/dev.config.js' : './config/pro.config.js');
+
+// console.log(IS_DEV)
 
 module.exports = object.assignIn({
     entry: {
