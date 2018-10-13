@@ -128,3 +128,11 @@ a{
 .always-invisibility {
 	visibility: hidden !important;
 }
+
+
+.ellipsis{
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+}

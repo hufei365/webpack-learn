@@ -43,6 +43,18 @@ module.exports = {
             filename: '../views/about.html',
             chunks: ['about'],
             template: 'html-withimg-loader!' + VIEWS_BASE + '/about/about.html'
+        }),
+        new HtmlWebpackPlugin({
+            title: 'Login Page',
+            filename: '../views/login.html',
+            // chunks: ['about'],
+            template: 'html-withimg-loader!' + VIEWS_BASE + '/login/login.html'
+        }),
+        new HtmlWebpackPlugin({
+            title: 'Blog Admin',
+            filename: '../views/admin.html',
+            chunks: ['admin'],
+            template: 'html-withimg-loader!' + VIEWS_BASE + '/admin/admin.html'
         })
     ],
     mode: 'production'

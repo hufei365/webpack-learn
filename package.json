@@ -4,7 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "prebuild": "rm -rf dist",
+        "prebuild": "rm -rf ../public",
         "build": "webpack --progress --colors --hot",
         "start:dev": "webpack-dev-server --mode development",
         "test": "echo \"Error: no test specified\" && exit 1"

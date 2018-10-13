@@ -18,6 +18,7 @@ module.exports = object.assignIn({
         home: './src/views/home/home.js',
         blog: './src/views/blog/blog.js'
         ,about: './src/views/about/about.js'
+        ,admin: './src/views/admin/admin.js'
     },
     output: {
         path: __dirname + './dist'
