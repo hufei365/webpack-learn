@@ -11,6 +11,7 @@ Vue.use(VueRouter);
 import Foo from './components/foo';
 import Bar from './components/bar';
 import Son from './components/son';
+import Sonson from './components/sonson';
 // import(/* webpackChunkName: "son" */ './components/son').then(Son=>{
 // 2. 定义路由
 // 每个路由应该映射一个组件。 其中"component" 可以是
@@ -22,7 +23,13 @@ const routes = [
     path: '/bar', component: Bar, children: [
       {
         path: 'son',
-        component: Son
+        component: Son,
+        children: [
+          {
+            path: 'sonson',
+            component: Sonson
+          }
+        ]
       }
     ]
   },
