@@ -1,51 +1,41 @@
-const webpack = require('webpack');
 const path = require('path');
-const object = require('lodash/fp/object');
-
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
-let IS_DEV = /webpack-dev-server/.test(process.argv[1]);
-// IS_DEV = true;
-
-
-const config = require( IS_DEV ? './config/dev.config.js' : './config/pro.config.js');
-
-// console.log(IS_DEV)
-
-module.exports = object.assignIn({
+module.exports = {
+    resolve: {
+        extensions: ['*', '.js', '.vue', '.json'],
+        alias: {
+            'vue$': 'vue/dist/vue.esm.js',
+            "@": path.resolve('/')
+        }
+    },
     entry: {
-        home: './src/views/home/home.js',
-        blog: './src/views/blog/blog.js'
-        ,about: './src/views/about/about.js'
-        ,admin: './src/views/admin/admin.js'
+        main:'./src/app.js',
+        // son: './src/components/son.vue',
     },
     output: {
-        path: __dirname + './dist'
+        filename: '[name].bundle.js',
+        chunkFilename: "[name].chunk.js",
+        path: path.resolve(__dirname, 'dist')
+    },
+    devtool: 'source-map',
+    devServer: {
+        contentBase: './dist',
+        port:'3000'
     },
     module: {
-        rules: [
-            {
-                test: /\.scss$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    //resolve-url-loader may be chained before sass-loader if necessary
-                    use: ['css-loader', 'sass-loader']
-                })
-            }
-            , {
-                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-                loader: 'url-loader',
-                options: {
-                    limit: 10000,
-                    name: path.posix.join('static', 'img/[name].[hash:7].[ext]')
-                }
-            }
-            , {
-                test: /\.hbs$/,
-                use: ['handlebars-loader']
-            }
-        ]
-    }
-
-}, config);
+        rules: [{
+            test: /\.vue$/,
+            loader: "vue-loader"
+        }]
+    },
+    plugins: [
+        new VueLoaderPlugin(),
+        new HtmlWebpackPlugin({
+            title: 'Development',
+            template: path.join(__dirname, './src/index.html')
+        })
+    ],
+    mode: 'development'
+};
