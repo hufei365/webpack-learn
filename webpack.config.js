@@ -11,7 +11,7 @@ module.exports = {
         }
     },
     entry: {
-        main:'./src/app.js',
+        main: './src/app.js',
         // son: './src/components/son.vue',
     },
     output: {
@@ -22,12 +22,25 @@ module.exports = {
     devtool: 'source-map',
     devServer: {
         contentBase: './dist',
-        port:'3000'
+        port: '3000'
     },
     module: {
         rules: [{
             test: /\.vue$/,
             loader: "vue-loader"
+        },
+        {
+            test: /\.m?js$/,
+            exclude: /(node_modules|bower_components)/,
+            use: {
+                loader: 'babel-loader',
+                options: {
+                    presets: ['@babel/preset-env'],
+                    plugins: [
+                        ["@babel/plugin-transform-react-jsx", { "pragma": "h" }]
+                    ]
+                }
+            }
         }]
     },
     plugins: [
